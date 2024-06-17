@@ -1,36 +1,55 @@
-(function(ext) {
-    // Cleanup function when the extension is unloaded
-    ext._shutdown = function() {};
-
-    // Status information
-    ext._status = {
-        status: 2,
-        msg: 'Ready'
+class MyExtension {
+  getInfo() {
+    return {
+      id: 'myExtension',
+      name: 'My Extension',
+      blocks: [
+        {
+          opcode: 'sayHello',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'Say Hello'
+        },
+        {
+          opcode: 'add',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'Add [A] + [B]',
+          arguments: {
+            A: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 10
+            },
+            B: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 20
+            }
+          }
+        },
+        {
+          opcode: 'square',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'Square of [X]',
+          arguments: {
+            X: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 5
+            }
+          }
+        }
+      ]
     };
+  }
 
-    // Blocks
-    ext.sayHello = function() {
-        alert('Hello, Scratch!');
-    };
+  sayHello() {
+    alert('Hello, Scratch!');
+  }
 
-    ext.add = function(a, b) {
-        return a + b;
-    };
+  add({ A, B }) {
+    return A + B;
+  }
 
-    ext.square = function(x) {
-        return x * x;
-    };
+  square({ X }) {
+    return X * X;
+  }
+}
 
-    // Block and block menu descriptions
-    var descriptor = {
-        blocks: [
-            [' ', 'Say Hello', 'sayHello'],
-            ['r', 'Add %n + %n', 'add', 10, 20],
-            ['r', 'Square of %n', 'square', 5]
-        ],
-        menus: {}
-    };
-
-    // Register the extension
-    ScratchExtensions.register('My Extension', descriptor, ext);
-})(window.ScratchExtensions.buildExtension());
+Scratch.extensions.register(new MyExtension());
