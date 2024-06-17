@@ -1,0 +1,35 @@
+(function(ext) {
+    // Cleanup function when the extension is unloaded
+    ext._shutdown = function() {};
+
+    // Status information
+    ext._status = {
+        status: 0,
+        msg: 'Uninitialized'
+    };
+
+    // Blocks
+    ext.sayHello = function() {
+        alert('Hello, Scratch!');
+    };
+
+    ext.add = function(a, b) {
+        return a + b;
+    };
+
+    ext.square = function(x) {
+        return x * x;
+    };
+
+    // Block and block menu descriptions
+    var descriptor = {
+        blocks: [
+            ['h', 'Say Hello', 'sayHello'],
+            ['r', 'Add %n + %n', 'add', 10, 20],
+            ['r', 'Square of %n', 'square', 5]
+        ]
+    };
+
+    // Register the extension
+    ScratchExtensions.register('My Extension', descriptor, ext);
+})(window.ScratchExtensions.buildExtension());
