@@ -4,8 +4,8 @@
 
     // Status information
     ext._status = {
-        status: 0,
-        msg: 'Uninitialized'
+        status: 2,
+        msg: 'Ready'
     };
 
     // Blocks
@@ -24,10 +24,11 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['h', 'Say Hello', 'sayHello'],
+            [' ', 'Say Hello', 'sayHello'],
             ['r', 'Add %n + %n', 'add', 10, 20],
             ['r', 'Square of %n', 'square', 5]
-        ]
+        ],
+        menus: {}
     };
 
     // Register the extension
