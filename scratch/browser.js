@@ -1,7 +1,3 @@
-/*
-   This extension was made with TurboBuilder!
-   https://turbobuilder-steel.vercel.app/
-*/
 (async function(Scratch) {
     const variables = {};
     const blocks = [];
@@ -146,6 +142,57 @@
             }
         }
     }
+    blocks.push({
+        opcode: "confirm",
+        blockType: Scratch.BlockType.BOOLEAN,
+        text: "confirm [TEXT]",
+        arguments: {
+            "TEXT": {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'Is a green apple green?',
+            },
+        },
+        disableMonitor: true,
+        isEdgeActivated: false
+    });
+    Extension.prototype["confirm"] = async (args, util) => {
+        return confirm(args["TEXT"])
+    };
+
+    blocks.push({
+        opcode: "prompt",
+        blockType: Scratch.BlockType.REPORTER,
+        text: "prompt [TEXT]",
+        arguments: {
+            "TEXT": {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'How are you?',
+            },
+        },
+        disableMonitor: true,
+        isEdgeActivated: false
+    });
+    Extension.prototype["prompt"] = async (args, util) => {
+        return prompt(args["TEXT"])
+    };
+
+    blocks.push({
+        opcode: "alert",
+        blockType: Scratch.BlockType.COMMAND,
+        text: "Alert the [TEXT] text",
+        arguments: {
+            "TEXT": {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'Hello, world!',
+            },
+        },
+        disableMonitor: true,
+        isEdgeActivated: false
+    });
+    Extension.prototype["alert"] = async (args, util) => {
+        alert(args["TEXT"])
+    };
+
     blocks.push({
         opcode: "newtab",
         blockType: Scratch.BlockType.COMMAND,
