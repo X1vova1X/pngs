@@ -1,0 +1,194 @@
+-- RoXP in-game
+
+local eXecutor = Instance.new("ScreenGui")
+local GUI = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local TextLabel = Instance.new("TextLabel")
+local close = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local execute = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local clear = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local UserScript = Instance.new("TextBox")
+local Scripts = Instance.new("Folder")
+
+eXecutor.Name = "eXecutor"
+eXecutor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+eXecutor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+GUI.Name = "GUI"
+GUI.Parent = eXecutor
+GUI.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+GUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GUI.BorderSizePixel = 0
+GUI.Position = UDim2.new(0.335585594, 0, 0.3828125, 0)
+GUI.Size = UDim2.new(0, 489, 0, 247)
+
+UICorner.CornerRadius = UDim.new(0, 10)
+UICorner.Parent = GUI
+
+TextLabel.Parent = GUI
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.0143149281, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 104, 0, 50)
+TextLabel.Font = Enum.Font.Jura
+TextLabel.Text = "RoXP"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+close.Name = "close"
+close.Parent = GUI
+close.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+close.BorderColor3 = Color3.fromRGB(0, 0, 0)
+close.BorderSizePixel = 0
+close.Position = UDim2.new(0.873210609, 0, 0, 0)
+close.Size = UDim2.new(0, 55, 0, 50)
+close.Font = Enum.Font.Jura
+close.Text = "X"
+close.TextColor3 = Color3.fromRGB(198, 198, 198)
+close.TextScaled = true
+close.TextSize = 14.000
+close.TextWrapped = true
+
+UICorner_2.CornerRadius = UDim.new(0, 10)
+UICorner_2.Parent = close
+
+execute.Name = "execute"
+execute.Parent = GUI
+execute.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+execute.BorderColor3 = Color3.fromRGB(0, 0, 0)
+execute.BorderSizePixel = 0
+execute.Position = UDim2.new(0.789366066, 0, 0.226720646, 0)
+execute.Size = UDim2.new(0, 96, 0, 36)
+execute.Font = Enum.Font.Jura
+execute.Text = "Execute"
+execute.TextColor3 = Color3.fromRGB(255, 255, 255)
+execute.TextScaled = true
+execute.TextSize = 14.000
+execute.TextWrapped = true
+
+UICorner_3.CornerRadius = UDim.new(0, 10)
+UICorner_3.Parent = execute
+
+clear.Name = "clear"
+clear.Parent = GUI
+clear.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+clear.BorderColor3 = Color3.fromRGB(0, 0, 0)
+clear.BorderSizePixel = 0
+clear.Position = UDim2.new(0.789366066, 0, 0.396761119, 0)
+clear.Size = UDim2.new(0, 96, 0, 36)
+clear.Font = Enum.Font.Jura
+clear.Text = "Clear"
+clear.TextColor3 = Color3.fromRGB(255, 255, 255)
+clear.TextScaled = true
+clear.TextSize = 14.000
+clear.TextWrapped = true
+
+UICorner_4.CornerRadius = UDim.new(0, 10)
+UICorner_4.Parent = clear
+
+ScrollingFrame.Parent = GUI
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
+ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.Position = UDim2.new(0.0122699384, 0, 0.202429146, 0)
+ScrollingFrame.Size = UDim2.new(0, 380, 0, 197)
+
+UserScript.Name = "UserScript"
+UserScript.Parent = ScrollingFrame
+UserScript.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
+UserScript.BorderColor3 = Color3.fromRGB(0, 0, 0)
+UserScript.BorderSizePixel = 0
+UserScript.ClipsDescendants = true
+UserScript.Position = UDim2.new(0, 1, 0.0153830284, 0)
+UserScript.Size = UDim2.new(0, 366, 0, 485)
+UserScript.ClearTextOnFocus = false
+UserScript.Font = Enum.Font.SourceSans
+UserScript.MultiLine = true
+UserScript.Text = "print(\"Hello World\")"
+UserScript.TextColor3 = Color3.fromRGB(255, 255, 255)
+UserScript.TextSize = 14.000
+UserScript.TextXAlignment = Enum.TextXAlignment.Left
+UserScript.TextYAlignment = Enum.TextYAlignment.Top
+
+Scripts.Name = "Scripts"
+Scripts.Parent = eXecutor
+
+local function SJDB_fake_script() -- GUI.drag 
+	local script = Instance.new('LocalScript', GUI)
+
+	local UIS = game:GetService("UserInputService")
+	local frame = script.Parent
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	
+	local function update(input)
+		local delta = input.Position - dragStart
+		frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+	
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	frame.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+coroutine.wrap(SJDB_fake_script)()
+local function PXAIEL_fake_script() -- Scripts.closeButton 
+	local script = Instance.new('LocalScript', Scripts)
+
+	script.Parent.Parent.GUI.close.MouseButton1Click:Connect(function()
+		script.Parent.Parent:Destroy()
+	end)
+end
+coroutine.wrap(PXAIEL_fake_script)()
+local function YVFGQSP_fake_script() -- Scripts.clearButton 
+	local script = Instance.new('LocalScript', Scripts)
+
+	script.Parent.Parent.GUI.clear.MouseButton1Click:Connect(function()
+		script.Parent.Parent.GUI.ScrollingFrame.UserScript.Text = ""
+	end)
+end
+coroutine.wrap(YVFGQSP_fake_script)()
+local function LMZO_fake_script() -- Scripts.executeButton 
+	local script = Instance.new('LocalScript', Scripts)
+
+	script.Parent.Parent.GUI.execute.MouseButton1Click:Connect(function()
+		local userScript = script.Parent.Parent.GUI.ScrollingFrame.UserScript.Text
+		if userScript then
+		    local executed = loadstring(userScript)
+		    executed()
+		end
+	end)
+end
+coroutine.wrap(LMZO_fake_script)()
