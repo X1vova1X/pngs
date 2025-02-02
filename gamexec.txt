@@ -1,4 +1,4 @@
--- GamExec in-game
+-- GameExec in-game
 
 local eXecutor = Instance.new("ScreenGui")
 local GUI = Instance.new("Frame")
@@ -37,7 +37,7 @@ TextLabel.BorderSizePixel = 0
 TextLabel.Position = UDim2.new(0.0143149281, 0, 0, 0)
 TextLabel.Size = UDim2.new(0, 104, 0, 50)
 TextLabel.Font = Enum.Font.Jura
-TextLabel.Text = "GamExec"
+TextLabel.Text = "GameExec"
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextScaled = true
 TextLabel.TextSize = 14.000
